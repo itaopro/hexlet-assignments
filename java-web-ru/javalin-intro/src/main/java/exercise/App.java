@@ -1,22 +1,21 @@
 package exercise;
 
-// BEGIN
 import io.javalin.Javalin;
-// END
 
 public final class App {
 
-    public static Javalin getApp() {
+    private static Javalin app;
 
-        // BEGIN
-        Javalin app = Javalin.create().start(7070);
-        app.get("/welcome", ctx -> ctx.result("Welcome to Hexlet!"));
+    public static Javalin getApp() {
+        if (app == null) {
+            app = Javalin.create();
+            app.get("/welcome", ctx -> ctx.result("Welcome to Hexlet!"));
+        }
         return app;
-        // END
     }
 
     public static void main(String[] args) {
-        Javalin app = getApp();
+        app = getApp();
         app.start(7070);
     }
 }
